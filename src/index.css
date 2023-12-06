@@ -1,13 +1,555 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/*
+=============== 
+Stock Photos
+===============
+*/
+
+.photos {
+    padding: 5rem 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.photos-center {
+    width: 90vw;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+}
+
+.photo {
+    height: 17.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo>img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.photo h4 {
+    margin-bottom: 0.5rem;
+}
+
+.photo p {
+    margin-bottom: 0;
+}
+
+.user-img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+}
+
+.photo-info {
+    position: absolute;
+    width: 100%;
+    padding: 1rem;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    transform: translateY(100%);
+    transition: all 0.3s linear;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.photo:hover .photo-info {
+    transform: translateY(0);
+}
+
+@media screen and (min-width: 576px) {
+    .photos-center {
+        grid-template-columns: repeat(auto-fill, minmax(368px, 1fr));
+    }
+    .search-form {
+        max-width: var(--fixed-width);
+    }
+}
+
+.loading {
+    text-align: center;
+    padding: 3rem;
+}
+
+
+/*
+  =============== 
+  Variables
+  ===============
+  */
+
+ :root {
+    /* dark shades of primary color*/
+    --clr-primary-1: hsl(283, 86%, 17%);
+    --clr-primary-2: hsl(282, 77%, 27%);
+    --clr-primary-3: hsl(291, 72%, 37%);
+    --clr-primary-4: hsl(283, 63%, 48%);
+    /* primary/main color */
+    --clr-primary-5: hsl(286, 78%, 60%);
+    /* lighter shades of primary color */
+    --clr-primary-6: hsl(279, 90%, 70%);
+    --clr-primary-7: hsl(286, 90%, 76%);
+    --clr-primary-8: hsl(277, 86%, 81%);
+    --clr-primary-9: hsl(280, 90%, 88%);
+    --clr-primary-10: hsl(279, 100%, 96%);
+    /* darkest grey - used for headings */
+    --clr-grey-1: hsl(280, 61%, 16%);
+    --clr-grey-2: hsl(282, 39%, 23%);
+    --clr-grey-3: hsl(281, 35%, 30%);
+    --clr-grey-4: hsl(284, 28%, 39%);
+    /* grey used for paragraphs */
+    --clr-grey-5: hsl(274, 22%, 49%);
+    --clr-grey-6: hsl(284, 23%, 60%);
+    --clr-grey-7: hsl(280, 27%, 70%);
+    --clr-grey-8: hsl(287, 31%, 80%);
+    --clr-grey-9: hsl(280, 32%, 89%);
+    --clr-grey-10: hsl(283, 33%, 96%);
+    --clr-white: #ffffff;
+    --clr-red-dark: hsl(0, 69%, 36%);
+    --clr-red-light: hsl(0, 65%, 71%);
+    --clr-green-dark: hsl(125, 65%, 26%);
+    --clr-green-light: hsl(125, 77%, 81%);
+    --clr-black: #121212;
+    --transition: all 0.3s linear;
+    --spacing: 0.1rem;
+    --radius: 0.25rem;
+    --light-shadow: 0 5px 15px rgba(78, 53, 85, 0.1);
+    --dark-shadow: 0 5px 15px rgba(34, 12, 38, 0.2);
+    --max-width: 1170px;
+    --fixed-width: 620px;
+}
+
+
+/*
+  =============== 
+  Global Styles
+  ===============
+  */
+
+*,
+ ::after,
+ ::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background: var(--clr-white);
+    color: var(--clr-grey-1);
+    line-height: 1.5;
+    font-size: 0.875rem;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    letter-spacing: var(--spacing);
+    text-transform: capitalize;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 0.875rem;
+}
+
+p {
+    margin-bottom: 1.25rem;
+}
+
+@media screen and (min-width: 800px) {
+    h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2.5rem;
+    }
+    h3 {
+        font-size: 1.75rem;
+    }
+    h4 {
+        font-size: 1rem;
+    }
+    body {
+        font-size: 1rem;
+    }
+    h1,
+    h2,
+    h3,
+    h4 {
+        line-height: 1;
+    }
+}
+
+
+/*  global classes */
+
+
+/* section */
+
+.section {
+    width: 90vw;
+    margin: 0 auto;
+    max-width: var(--max-width);
+}
+
+@media screen and (min-width: 992px) {
+    .section {
+        width: 95vw;
+    }
+}
+
+
+/*
+  =============== 
+  Stock Photos
+  ===============
+  */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    z-index: 100;
+}
+
+.navbar.focused {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar__logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #260535;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-right: 1rem;
+}
+
+
+/* Optional: Styling for Navbar Links */
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__links a {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    /* Increase the font size */
+    font-weight: 600;
+    /* Make it bolder */
+    background-color: #260535;
+    color: whitesmoke;
+    border-radius: 5px;
+    margin-left: 1rem;
+    text-decoration: none;
+}
+
+.navbar__links a:hover {
+    background-color: rgb(81, 16, 103);
+    color: whitesmoke
+}
+
+.navbar__search-form {
+    display: flex;
+    align-items: center;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    border: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+    background: transparent;
+    color: #260535;
+    border-bottom: 3px solid #180a25;
+}
+
+.form-input::placeholder {
+    color: #7c5d87;
+}
+
+.form-input.focused {
+    border-color: rgb(81, 16, 103);
+}
+
+.submit-btn {
+    background-color: #260535;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 3px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+    background-color: rgb(81, 16, 103);
+}
+
+.submit-btn:focus {
+    box-shadow: 0 0 0 2px rgb(81, 16, 103);
+}
+
+
+/* Favorite button styles */
+
+.favorite-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: rgb(239, 191, 239);
+    transition: transform 0.2s ease-in-out;
+    z-index: 1;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.2);
+}
+
+.favorite-btn.active {
+    color: #340848;
+}
+
+.favourite-photo-info span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Photo container styles */
+
+.photo:hover {
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    /* Increase the shadow effect */
+    border: 2px solid #7005a2;
+    /* Add a border to the photo on hover */
+}
+
+.photo {
+    position: relative;
+    height: 17.5rem;
+    overflow: hidden;
+}
+
+.photo>img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.photo-info {
+    position: absolute;
+    width: 100%;
+    padding: 1rem;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    transform: translateY(100%);
+    transition: all 0.3s linear;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.photo:hover .photo-info {
+    transform: translateY(0);
+}
+
+@media screen and (min-width: 576px) {
+    .photos-center {
+        grid-template-columns: repeat(auto-fill, minmax(368px, 1fr));
+    }
+    .search-form {
+        max-width: var(--fixed-width);
+    }
+}
+
+.loading {
+    text-align: center;
+    padding: 3rem;
+}
+
+
+/* Favourites Section */
+
+.favourites {
+    padding: 5rem 0;
+}
+
+.favourites__center {
+    width: 90vw;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+}
+
+
+/* Favourite Photo Container Styles */
+
+.favourite-photo {
+    position: relative;
+    height: 17.5rem;
+    overflow: hidden;
+}
+
+.favourite-photo>img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.favourite-photo-info {
+    position: absolute;
+    width: 100%;
+    padding: 1rem;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    transform: translateY(100%);
+    transition: all 0.3s linear;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.favourite-photo:hover .favourite-photo-info {
+    transform: translateY(0);
+}
+
+
+/* Remove the Default List Styles from the Favourites Component */
+
+.favourites__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Share Button */
+
+.share-btn {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    background-color: transparent;
+    color: rgb(239, 191, 239);
+    border-color: #3b0361;
+    border: none;
+    outline: none;
+    padding: 0.1rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.share-btn:hover {
+    transform: scale(1.2);
+}
+
+.share-btn:focus {
+    box-shadow: none;
+}
+
+
+/* Download Button */
+
+.download-btn {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 3rem;
+    /* Adjust the left value to control the horizontal position */
+    background-color: transparent;
+    color: rgb(239, 191, 239);
+    border: none;
+    outline: none;
+    padding: 0.1rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    border-color: #3b0361;
+    transition: transform 0.2s ease-in-out;
+}
+
+.download-btn:hover {
+    transform: scale(1.2);
+}
+
+.download-btn:focus {
+    box-shadow: none;
+}
+
+
+/* Add a gap between <h4>{name}</h4> and the buttons */
+
+.photo-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* Adjust the gap value as needed */
+}
+
+
+/* Add space between navbar and photos */
+
+.photos {
+    padding: 5rem 0;
+    margin-top: 5rem;
+    /* Add the desired margin value to create space */
 }
